@@ -1,0 +1,1 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/5p5jcf8i901qye4o?svg=true)](https://ci.appveyor.com/project/Vladimir8Grin/apporder)
