@@ -11,15 +11,16 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OrderTest {
-private WebDriver driver;
+    private WebDriver driver;
 
     @BeforeAll
     public static void setupAll() {
 
         WebDriverManager.chromedriver().setup();
     }
+
     @BeforeEach
-    public  void  BeforeEach(){
+    public void beforeEach() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
@@ -27,19 +28,21 @@ private WebDriver driver;
         driver = new ChromeDriver(options);
         driver.get("http://localhost:9999");
     }
+
     @AfterEach
-    public void AfterEach(){
+    public void afterEach() {
         driver.quit();
         driver = null;
     }
 
     @Test
-    public void SuccessfulCompletionOfTheForm(){
-        driver.findElement(By.cssSelector("[data-test-id=‘name’] input")).sendKeys("Владимир Груненко");
-        driver.findElement(By.cssSelector("[data-test-id=‘phone’] input")) .sendKeys("+79532672323");
-        driver.findElement(By.cssSelector("[data-test-id=‘agreement’]")).click();
+    public void successfulCompletionOfTheForm() {
+        //Исправил, поставил одинарные кавычки.
+        driver.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Владимир Груненко");
+        driver.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79532672323");
+        driver.findElement(By.cssSelector("[data-test-id='agreement']")).click();
         driver.findElement(By.cssSelector("button.button")).click();
-        var actualText = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText().trim();
+        var actualText = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText().trim();
         assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", actualText);
     }
 }
